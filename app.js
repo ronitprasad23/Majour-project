@@ -65,6 +65,9 @@ app.get("/Listings/:id/edit", async (req,res) => {
 //update Route:
 app.put("/Listings/:id", async (req,res) => {
     let {id} = req.params;
+    let url = req.body.listing.image;
+    let filename = "random";
+    req.body.listing.image = {url,filename};
     await Listing.findByIdAndUpdate(id, {...req.body.listing});
     res.redirect(`/Listings/${id}`);
 });
