@@ -1,10 +1,18 @@
 <% layout("/Layouts/boillerplate") %>
-<body>
-    <h3>Listing Details:</h3>
+<div class="row mt-3">
+    <div class="col-8 offset-2">
+
+    <h3><b>Listing Details:</b></h3>
+    <div class="card col-6 offset-3">
+        <img src="<%= listings.image.url %>" class="card-img-top show-img" alt="listing_image">
+    <div class="card-body">
+        <p class="card-text"><%=listings.title%></p>
+    </div>
+    </div>
+
     <ul>
         <li><%=listings.title%></li>
         <li><%=listings.description%></li>
-        <img src="<%=listings.image.url%>" class="img" <br>
         <li> &#8377; <%= listings.price.toLocaleString("en-IN") %></li>
         <li><%=listings.location%></li>
         <li><%=listings.country%></li>
@@ -12,7 +20,8 @@
     <br>
     <a href="/Listings/<%= listings._id%>/edit" class="btn btn-outline-primary btn-sm">Edit Your Listing</a>
     <br><br>
-    <form method="POST" action="/Listings/<%=listings._id%>?_method=DELETE">
+    <form method="POST" action="/Listings/<%=listings._id%>?_method=DELETE" class="mb-3">
         <button class="btn btn-outline-danger btn-sm">Delete This Listing</button>
     </form>
-</body>
+    </div>
+</div>
