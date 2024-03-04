@@ -62,14 +62,39 @@ app.get("/Listings/:id/edit", async (req,res) => {
     res.render("listings/edit", {listings});
 })
 
-//update Route:
-app.put("/Listings/:id", async (req,res) => {
-    let {id} = req.params;
-    let url = req.body.listing.image;
-    let filename = "random";
-    req.body.listing.image = {url,filename};
-    await Listing.findByIdAndUpdate(id, {...req.body.listing});
-    res.redirect(`/Listings/${id}`);
+//update route:
+app.put("/Listings/:id", async (req, res) => {
+    // const { id } = req.params;
+    // const { image, ...otherProps } = req.body.Listing;
+    // let existingListing = await Listing.findById(id);
+
+    // // Check if there's a new image provided
+    // if (image && image.url && image.filename) {
+    //     // Update image URL and filename
+    //     existingListing.image.url = image.url;
+    //     existingListing.image.filename = image.filename;
+    // }
+
+    // Update other properties
+//     Object.assign(existingListing, otherProps);
+
+//     await existingListing.save();
+//     res.redirect(`/Listings/${id}`);
+let {id}=req.params;// console.log(id,currUser._id,list.owner._id);
+        // console.log(req.body.listing);
+        let img={filename:"listingimage",url:req.body.listing.image}
+        let data={...req.body.listing,image:{...img}}
+        // console.log(data)
+        // let url=req.file.path;
+        // let filename=req.file.filename;
+        // if(req.file){
+        let list= await Listing.findByIdAndUpdate(id, data);
+        // list.image={url,filename};
+        // await list.save();
+        // }
+        // req.flash("success","Listing Updated Succesfully");
+        res.redirect(`/Listings/${id}`);
+     
 });
 
 //delete Route:
